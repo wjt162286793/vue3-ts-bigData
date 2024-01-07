@@ -64,7 +64,7 @@
 
 <script lang="ts" setup>
 import { searchData } from "./type";
-import { domainOptions, sourceOptions, statusOptions, tableData, dialogVisible,dialogTitle,dialogWidth,activeRow } from "./data";
+import { domainOptions, sourceOptions, statusOptions, tableData, dialogVisible,dialogTitle,dialogWidth,activeRow,handlerType } from "./data";
 let query: Ref<searchData> = ref({
   dataName: null,
   domain: [],
@@ -121,6 +121,7 @@ const addDataHandler = ()=>{
     dialogVisible.value = true
     dialogTitle.value = '新建数据源'
     dialogWidth.value = '700px'
+    handlerType.value = 'add'
     activeRow.value = null
 }
 

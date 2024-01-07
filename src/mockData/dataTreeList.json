@@ -1,0 +1,243 @@
+{
+    "allData":{
+        "hokHeroWinList": {
+            "tableCloumn": [
+                {
+                    "prop": "heroName",
+                    "label": "英雄名称",
+                    "sort": false
+                },
+                {
+                    "prop": "matching",
+                    "label": "峡谷匹配",
+                    "sort": false
+                },
+                {
+                    "prop": "flame",
+                    "label": "火焰山大战",
+                    "sort": false
+                },
+                {
+                    "prop": "rank",
+                    "label": "峡谷排位赛",
+                    "sort": false
+                },
+                {
+                    "prop": "chess",
+                    "label": "王者模拟战",
+                    "sort": false
+                },
+                {
+                    "prop": "clone",
+                    "label": "克隆大乱斗",
+                    "sort": false
+                }
+            ],
+            "data": [
+                {
+                    "heroName": "亚瑟",
+                    "matching": "43%",
+                    "flame": "30%",
+                    "rank": "35%",
+                    "chess": "-",
+                    "clone": "15%"
+                },
+                {
+                    "heroName": "安琪拉",
+                    "matching": "34%",
+                    "flame": "55%",
+                    "rank": "43%",
+                    "chess": "-",
+                    "clone": "29%"
+                },
+                {
+                    "heroName": "赵云",
+                    "matching": "52%",
+                    "flame": "19%",
+                    "rank": "35%",
+                    "chess": "28%",
+                    "clone": "15%"
+                },
+                {
+                    "heroName": "马可波罗",
+                    "matching": "32%",
+                    "flame": "42%",
+                    "rank": "36%",
+                    "chess": "-",
+                    "clone": "67%"
+                },
+                {
+                    "heroName": "白起",
+                    "matching": "33%",
+                    "flame": "23%",
+                    "rank": "45%",
+                    "chess": "10%",
+                    "clone": "13%"
+                },
+                {
+                    "heroName": "韩信",
+                    "matching": "23%",
+                    "flame": "14%",
+                    "rank": "23%",
+                    "chess": "-",
+                    "clone": "43%"
+                },
+                {
+                    "heroName": "吕布",
+                    "matching": "32%",
+                    "flame": "12%",
+                    "rank": "39%",
+                    "chess": "45%",
+                    "clone": "15%"
+                }
+            ]
+        },
+        "hokCountryRankList":{
+            "tableCloumn": [
+                {
+                    "prop": "playerName",
+                    "label": "选手名称",
+                    "sort": false
+                },
+                {
+                    "prop": "heroName",
+                    "label": "所属英雄",
+                    "sort": false
+                },
+                {
+                    "prop": "rankStarsNum",
+                    "label": "排位星数",
+                    "sort": false
+                },
+                {
+                    "prop": "peakScore",
+                    "label": "巅峰分数",
+                    "sort": false
+                },
+                {
+                    "prop": "force",
+                    "label": "英雄战力",
+                    "sort": false
+                },
+                {
+                    "prop": "nowCompetition",
+                    "label": "当前赛季胜率",
+                    "sort": false
+                },
+                {
+                    "prop": "allCompetition",
+                    "label": "英雄总胜率",
+                    "sort": false
+                },
+                {
+                    "prop":"desc",
+                    "label":"选手简介",
+                    "sort":false
+                }
+            ],
+            "data": [
+                {
+                    "playerName": "吕德华",
+                    "heroName": "吕布",
+                    "rankStarsNum": "122",
+                    "peakScore": "2300",
+                    "force": "16000",
+                    "nowCompetition": "72%",
+                    "allCompetition":"68%",
+                    "desc":"李奶奶:一条懂节目效果的国服吕布(菜狗子)"
+                },
+                {
+                    "playerName": "树叶",
+                    "heroName": "孙策",
+                    "rankStarsNum": "110",
+                    "peakScore": "2400",
+                    "force": "19000",
+                    "nowCompetition": "70%",
+                    "allCompetition":"59%",
+                    "desc":"幽灵船长:不要输在不会表达上"
+                },
+                {
+                    "playerName": "夫赖",
+                    "heroName": "老夫子",
+                    "rankStarsNum": "133",
+                    "peakScore": "2350",
+                    "force": "19000",
+                    "nowCompetition": "72%",
+                    "allCompetition":"65%",
+                    "desc":"赖神:一打五都死不了的小强"
+                },
+                {
+                    "playerName": "听安",
+                    "heroName": "元歌",
+                    "rankStarsNum": "156",
+                    "peakScore": "2500",
+                    "force": "21000",
+                    "nowCompetition": "75%",
+                    "allCompetition":"67%",
+                    "desc":"花果山猿哥:那年我双手插兜,不知道什么叫做对手"
+                },
+                {
+                    "playerName": "王惊涛",
+                    "heroName": "海诺",
+                    "rankStarsNum": "0",
+                    "peakScore": "1200",
+                    "force": "0",
+                    "nowCompetition": "0%",
+                    "allCompetition":"0%",
+                    "desc":"未来的国一海诺"
+                }
+
+            ]
+        },
+        "yesterdayQuantity":{
+            "tableCloumn":[
+                {
+                    "prop":"region",
+                    "label":"区域",
+                    "sort":false
+                },
+                {
+                    "prop": "input",
+                    "label": "输入",
+                    "sort": false
+                },
+                {
+                    "prop": "output",
+                    "label": "输出",
+                    "sort": false
+                },
+                {
+                    "prop": "end",
+                    "label": "完毕",
+                    "sort": false
+                },
+                {
+                    "prop": "break",
+                    "label": "损坏",
+                    "sort": false
+                }
+            ],
+            "data":[{
+               "region":"北京",
+               "input":12122133422,
+               "output":1347190712,
+               "end":2141414,
+               "break":34141
+            },{
+                "region":"上海",
+                "input":34235213131,
+                "output":4224252523,
+                "end":2647322,
+                "break":85671
+             },{
+                "region":"山西",
+                "input":132543654647,
+                "output":141421341341,
+                "end":45353634,
+                "break":121323
+             }
+        ]
+        }
+    }
+
+}

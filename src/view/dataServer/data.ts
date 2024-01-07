@@ -69,3 +69,5 @@ export let ruleForm= ref<RuleForm>({
     code: "",
     domain: [],
   });
+//操作类型
+export let handlerType = ref<string>('')

@@ -9,8 +9,9 @@ import pinia from './store'
 //router
 import router from './router/index'
 
-
-
+//vxe-table
+import VXETable from 'vxe-table'
+import 'vxe-table/lib/style.css'
 
 
 import { createApp } from 'vue'
@@ -23,6 +24,7 @@ Vue.use(router)
 Vue.use(ElementPlus, {
   locale: zhCn,
 })
+Vue.use(VXETable)
 
 for (const [key, component] of Object.entries(ElementPlusIconsVue)) {
     Vue.component(key, component)

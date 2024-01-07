@@ -7,6 +7,7 @@
     :destroy-on-close="true"
   >
     <el-form
+      v-show="handlerType !== 'delete'"
       ref="ruleFormRef"
       :model="ruleForm"
       :rules="rules"
@@ -16,10 +17,18 @@
       status-icon
     >
       <el-form-item label="数据名称" prop="dataName">
-        <el-input class="formItem" v-model="ruleForm.dataName" />
+        <el-input
+          class="formItem"
+          v-model="ruleForm.dataName"
+          :disabled="handlerType === 'edit'"
+        />
       </el-form-item>
       <el-form-item label="数据来源" prop="source">
-        <el-select class="formItem" v-model="ruleForm.source">
+        <el-select
+          class="formItem"
+          v-model="ruleForm.source"
+          :disabled="handlerType === 'edit'"
+        >
           <el-option
             v-for="(item, index) in sourceOptions"
             :key="index"
@@ -52,6 +61,7 @@
         <el-switch v-model="ruleForm.status" />
       </el-form-item>
     </el-form>
+    <p v-show="handlerType === 'delete'">是否移除该数据</p>
     <template #footer>
       <span class="dialog-footer">
         <el-button @click="cancelHandler">取消</el-button>
@@ -74,6 +84,7 @@ import {
   statusOptions,
   tableData,
   ruleForm,
+  handlerType,
 } from "./data";
 import type { FormInstance, FormRules } from "element-plus";
 import { cloneDeep } from "lodash";
@@ -92,22 +103,35 @@ const cancelHandler = () => {
 };
 const sureHandler = () => {
   if (!ruleFormRef.value) return;
-  ruleFormRef.value.validate((valid: boolean, fields: any) => {
-    if (valid) {
-      console.log(ruleForm.value, "数据");
-      if (!activeRow.value) {
-        let newRow: any = cloneDeep(ruleForm.value);
-        newRow.id = tableData.value.length + 1;
-        newRow.usageAmount = 0;
-        tableData.value.push(newRow);
-        console.log(tableData, "新的数据");
+  if (handlerType.value === "delete") {
+    let index: number = tableData.value.findIndex(
+      (item: any) => item.id === activeRow.value.id
+    );
+    tableData.value.splice(index, 1);
+  } else {
+    ruleFormRef.value.validate((valid: boolean, fields: any) => {
+      if (valid) {
+        if (handlerType.value === "add") {
+          //新增
+          let newRow: any = cloneDeep(ruleForm.value);
+          newRow.id = tableData.value.length + 1;
+          newRow.usageAmount = 0;
+          tableData.value.push(newRow);
+        } else if (handlerType.value === "edit") {
+          //编辑
+          let index: number = tableData.value.findIndex(
+            (item: any) => item.id === ruleForm.value.id
+          );
+          tableData.value[index] = ruleForm.value;
+          console.log(tableData.value,ruleForm.value,'???')
+        }
+        cancelHandler();
       } else {
+        console.log("error submit!", fields);
       }
-      cancelHandler();
-    } else {
-      console.log("error submit!", fields);
-    }
-  });
+    });
+  }
+  
 };
 
 const rules = reactive<FormRules<RuleForm>>({
