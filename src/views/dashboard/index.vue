@@ -1,5 +1,5 @@
 <template>
-    行为分析
+    主页
 </template>
 <script lang="ts" setup>
 

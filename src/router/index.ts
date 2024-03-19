@@ -1,187 +1,25 @@
-//引入router内部的函数方法
-import { createRouter, createWebHistory, RouteRecordRaw } from 'vue-router'
- 
-//这里定义的公共路由,当然也可以添加一个404的路由
+import { createRouter, createWebHashHistory, RouteRecordRaw } from 'vue-router'
+
 const globalRoutes:Array<RouteRecordRaw> = [
-  {
-    path:'/login',
-    name:'login',
-    component:()=>import('@/view/login/index.vue')
-  },
-  {
-    path:'/',
-    redirect:'/dashboard',
-  }
+    {
+        path:'/login',
+        name:'login',
+        meta:{
+            cname:'登录页'
+        },
+        component:()=>import('@/views/login/index.vue')
+    },
+    {
+        path:'/dashboard',
+        name:'dashboard',
+        component:()=>import('@/views/dashboard/index.vue')
+    }
 ]
- 
-//权限路由,这里定义的是全量的路由,后续需要权限的匹配
-const asyncRoutes:Array<RouteRecordRaw> = [
-  {
-    path:'/dashboard',
-    name:'dashboard',
-    redirect:'/dashboard/homePage',
-    component:()=>import('@/view/dashboard/index.vue'),
-    children:[
-      {
-        path:'/dashboard/homePage',
-        name:'homePage',
-        component:()=>import('@/view/homepage/index.vue'),
-        meta:{cname:'主页',type:'page'}
-     },
-     {
-        path:'/dashboard/dataMode',
-        name:'dataMode',
-        redirect:'/dashboard/dataMode/dataServer',
-        meta:{cname:'数据管理',type:'group'},
-        children:[
-          {
-            path:'/dashboard/dataMode/dataServer',
-            name:'dataServer',
-            component:()=>import('@/view/dataServer/index.vue'),
-            meta:{cname:'数据服务',type:'page'}
-          },
-          {
-            path:'/dashboard/dataMode/dataReport',
-            name:'dataReport',
-            component:()=>import('@/view/dataReport/index.vue'),
-            meta:{cname:'数据报表',type:'page'}
-          },          {
-            path:'/dashboard/dataMode/dataPlan',
-            name:'dataPlan',
-            component:()=>import('@/view/dataPlan/index.vue'),
-            meta:{cname:'数据规划',type:'page'}
-          },          {
-            path:'/dashboard/dataMode/dataCollect',
-            name:'dataCollect',
-            component:()=>import('@/view/dataCollect/index.vue'),
-            meta:{cname:'数据采集',type:'page'}
-          }
-        ]
-     },
-     {
-      path:'/dashboard/apiMode',
-      name:'apiMode',
-      redirect:'/dashboard/apiMode/apiServer',
-      meta:{cname:'接口管理',type:'group'},
-      children:[
-        {
-          path:'/dashboard/apiMode/apiServer',
-          name:'apiServer',
-          component:()=>import('@/view/apiServer/index.vue'),
-          meta:{cname:'接口服务',type:'page'}
-        },
-        {
-          path:'/dashboard/apiMode/flowManage',
-          name:'flowManage',
-          component:()=>import('@/view/flowManage/index.vue'),
-          meta:{cname:'流量管理',type:'page'}
-        },        
-        {
-          path:'/dashboard/apiMode/flowStatistics',
-          name:'flowStatistics',
-          component:()=>import('@/view/flowStatistics/index.vue'),
-          meta:{cname:'流量统计',type:'page'}
-        },  
-      ]
-     },
-     {
-      path:'/dashboard/userMode',
-      name:'userMode',
-      redirect:'/dashboard/userMode/userPortrait',
-      meta:{cname:'用户管理',type:'group'},
-      children:[
-        {
-          path:'/dashboard/userMode/userPortrait',
-          name:'userPortrait',
-          component:()=>import('@/view/userPortrait/index.vue'),
-          meta:{cname:'用户画像',type:'page'}
-        },
-        {
-          path:'/dashboard/userMode/userBehaviour',
-          name:'userBehaviour',
-          component:()=>import('@/view/userBehaviour/index.vue'),
-          meta:{cname:'行为分析',type:'page'}
-        },  
-        {
-          path:'/dashboard/userMode/userRoleConfig',
-          name:'userRoleConfig',
-          component:()=>import('@/view/userRoleConfig/index.vue'),
-          meta:{cname:'权限配置',type:'page'}
-        },
-      ]
-     },
-     {
-      path:'/dashboard/safeMode',
-      name:'safeMode',
-      redirect:'/dashboard/safeMode/safeData',
-      meta:{cname:'安全管理',type:'group'},
-      children:[
-        {
-          path:'/dashboard/safeMode/safeData',
-          name:'safeData',
-          component:()=>import('@/view/safeData/index.vue'),
-          meta:{cname:'数据安全',type:'page'}
-        },
-        {
-          path:'/dashboard/safeMode/safeInternet',
-          name:'safeInternet',
-          component:()=>import('@/view/safeInternet/index.vue'),
-          meta:{cname:'网络安全',type:'page'}
-        },
-      ]
-     },
-     {
-      path:'/dashboard/integrateMode',
-      name:'integrateMode',
-      redirect:'/dashboard/integrateMode/ide',
-      meta:{cname:'集成功能',type:'group'},
-      children:[
-        {
-          path:'/dashboard/integrateMode/ide',
-          name:'ide',
-          component:()=>import('@/view/ide/index.vue'),
-          meta:{cname:'ide功能',type:'page'}
-        },
-        {
-          path:'/dashboard/integrateMode/dbserver',
-          name:'dbserver',
-          component:()=>import('@/view/dbserver/index.vue'),
-          meta:{cname:'数据库查询',type:'page'}
-        },
-      ]
-     },
-     {
-      path:'/dashboard/systemMode',
-      name:'systemMode',
-      redirect:'/dashboard/systemMode/theme',
-      meta:{cname:'系统管理',type:'group'},
-      children:[
-        {
-          path:'/dashboard/systemMode/theme',
-          name:'theme',
-          component:()=>import('@/view/theme/index.vue'),
-          meta:{cname:'系统主题',type:'page'}
-        },
-        {
-          path:'/dashboard/systemMode/version',
-          name:'version',
-          component:()=>import('@/view/version/index.vue'),
-          meta:{cname:'版本管理',type:'page'}
-        },
-      ]
-     },
-    ]
-  },
-]
- 
-//将公共路由和权限路由合并,组成全量路由
-const routes:Array<RouteRecordRaw> = new Array().concat(globalRoutes).concat(asyncRoutes)
- 
-//创建路由的实例
+const allRoutes:Array<RouteRecordRaw> = [].concat(globalRoutes)
+
 const router = createRouter({
-  history: createWebHistory(),
-  routes
+    history:createWebHashHistory(),
+    routes:allRoutes
 })
- 
-//将路由实例暴露出去
+
 export default router

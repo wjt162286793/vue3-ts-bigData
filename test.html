@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <canvas id="canvas" width="1000" height="800"></canvas>
+    <script>
+
+        const canvas = document.querySelector('canvas')
+        let canvasContext = canvas.getContext('2d')
+
+        canvasContext.rect(100,100,100,100)
+        canvasContext.fillStyle = 'red'
+        canvasContext.fill()
+    </script>
+</body>
+</html>
