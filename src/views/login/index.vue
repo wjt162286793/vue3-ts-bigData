@@ -2,14 +2,22 @@
   <div class="mainBox">
     <canvas id="canvas" class="canvasBox"></canvas>
     <div class="loginBox">
-        <img src="@/assets/login/spaceIcon.svg" class="icon" alt="">
-        <button class="btn">欢迎进入梦空间</button>
+      <img src="@/assets/login/spaceIcon.svg" class="icon" alt="" />
+      <button class="btn" @click="gotoHomePage">欢迎进入梦空间</button>
     </div>
   </div>
 </template>
 
 <script lang="ts" setup>
 import { Point, pointType } from "./utils.ts";
+const router = useRouter();
+
+const gotoHomePage = () => {
+  console.log("点击了没", router);
+  router.push({
+    name: "dashboard",
+  });
+};
 
 onMounted(() => {
   let canvas: HTMLCanvasElement = document.querySelector("canvas");
@@ -47,7 +55,7 @@ onMounted(() => {
       points.forEach((item: pointType, j: number) => {
         item.update(width, height);
         item.draw(canvasContext);
-        for (var i = j + 1, len = points.length; i < len; i++) {
+        for (let i = j + 1, len = points.length; i < len; i++) {
           point = points[i];
           c = Math.sqrt(
             Math.pow(point.x - item.x, 2) + Math.pow(point.y - item.y, 2)
@@ -88,24 +96,28 @@ onMounted(() => {
     width: 300px;
     height: 500px;
     position: absolute;
-    opacity:1;
+    opacity: 1;
     left: calc(50% - 150px);
     top: calc(50% - 250px);
     z-index: 2;
     display: flex;
     flex-direction: column;
-    .icon{
-        height: 200px;
+    .icon {
+      height: 200px;
     }
-    .btn{
-        margin-top: 30px;
-        background-image: linear-gradient(to right, rgb(116, 248, 171) , rgb(11, 236, 124));
-        letter-spacing: 4px;
-        color: #fff;
-        font-size: 16px;
-        height: 50px;
-        cursor: pointer;
-        border-radius: 10px;
+    .btn {
+      margin-top: 30px;
+      background-image: linear-gradient(
+        to right,
+        rgb(116, 248, 171),
+        rgb(11, 236, 124)
+      );
+      letter-spacing: 4px;
+      color: #fff;
+      font-size: 16px;
+      height: 50px;
+      cursor: pointer;
+      border-radius: 10px;
     }
   }
 }
