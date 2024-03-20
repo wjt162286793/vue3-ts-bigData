@@ -1,73 +1,87 @@
 <template>
   <div class="homePageBox">
-    <div class="menuBox">
-      <div class="iconBox">
-        <img
-          src="@/assets/homePage/menu.svg"
-          alt=""
-          @click="changeMenuStatus"
-        />
-      </div>
-      <ul class="menuList" :style="menuListStyle">
-        <li v-for="(item, index) in menuList" :key="index">{{ item }}</li>
-      </ul>
+    <ul class="menuList">
+      <img src="@/assets/homePage/menu.svg"/>
+      <li class="liBox" v-for="(item) in menuList" :key="item.name" :style="getStyle(item)" @click="changeItem(item)">{{ item.cname }}</li>
+      <img class="close" src="@/assets/homePage/close.svg"/>
+    </ul>
+    <div class="contextBox">
+      <router-view>
+      </router-view>
     </div>
   </div>
 </template>
 <script lang="ts" setup>
-const menuShow: Ref<boolean> = ref(false);
-const menuListStyle = reactive({
-  width: "0px",
-});
-const menuList: Ref<any> = ref([]);
-const changeMenuStatus = () => {
-  if (menuShow.value) {
-    menuListStyle.width = "0px";
-    menuList.value = [];
-  } else {
-    menuListStyle.width = "100px";
-    setTimeout(() => {
-      menuList.value = ["个人信息", "好友空间", "mini游戏"];
-    }, 200);
+import { menuItem } from "./type.ts";
+
+//路由
+const route = useRoute()
+const router = useRouter()
+
+
+const menuList: Ref<Array<menuItem>> = ref([]);
+menuList.value = route.matched[0].children.map((item:menuItem)=>{
+  return{
+    name:item.name,
+  path:item.path,
+  cname:item.meta.cname
   }
-  menuShow.value = !menuShow.value;
-};
+})
+
+//默认选中菜单项
+const activeMenuItemName:Ref<string> = ref('')
+const activelStyle = {
+  color: '#000',
+  background: '#fff'
+}
+onMounted(()=>{
+  activeMenuItemName.value = route.name
+})
+const getStyle = (item:menuItem) =>{
+ return activeMenuItemName.value === item.name ? activelStyle:null
+}
+const changeItem = (item:menuItem)=>{
+  router.push({name:item.name})
+  activeMenuItemName.value = item.name
+}
 </script>
 <style lang="less" scoped>
 .homePageBox {
-  position: relative;
-  .menuBox {
+  display: flex;
+  .menuList {
+    width: 100px;
+    background: #000;
+    height: 100vh;
     display: flex;
-    position: absolute;
-    left: 0px;
-    top: 50vh;
-    .menuList {
-      //   width: 100px;
-      background: #fff;
-      transition: width 0.2s;
-      -webkit-transition: width 0.2s; /* Safari */
-      li {
-        text-align: center;
-        height: 40px;
-        line-height: 40px;
-        font-size: 14px;
-        color: rgb(12, 12, 12);
-      }
-      li:hover {
-        background: chartreuse;
-        cursor: pointer;
-        color: #fff;
-      }
+    flex-direction: column;
+    border-right:1px #fff solid;
+    position: relative;
+    img{
+      height: 30px;
+      margin:20px 0px;
     }
-    .iconBox {
-      display: flex;
-      width: 50px;
-      height: 50px;
-      padding: 10px;
-      background: #fff;
-      border-radius: 50%;
+    .close{
+       position:absolute;
+       left: 30px;
+       bottom: 20px;
+       cursor: pointer;
+    }
+    .liBox{
+      height: 40px;
+      line-height: 40px;
+      border-bottom: 1px #f1f1f1 solid;
+      text-align: center;
+      color: #fff;
       cursor: pointer;
     }
+    .liBox:hover{
+      color: #000;
+      background: #fff;
+    }
+  }
+  .contextBox{
+    flex: 1;
+    color: #fff;
   }
 }
 </style>
