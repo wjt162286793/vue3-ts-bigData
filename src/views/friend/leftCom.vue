@@ -1,83 +1,101 @@
 <template>
   <div class="leftList">
     <div class="header">
-      <img class="avatar" src="@/assets/friend/avatar.png" alt=""/>
+      <img class="avatar" src="@/assets/friend/avatar.png" alt="" />
       <h4 class="title">{{ activeType.typeCname }}</h4>
       <img class="avatar" src="@/assets/friend/add.svg" alt="" />
     </div>
-    <div class="searchBox" v-if="activeType.typeName !== 'share' ">
-      <input  class="input" placeholder="搜索" type="text" />
+    <div class="searchBox" v-if="activeType.typeName !== 'share'">
+      <input class="input" placeholder="搜索" type="text" />
     </div>
-      <MsgCom v-if="activeType.typeName === 'msg'" @reqChatMsgList="reqChatMsgList" ></MsgCom>
-      <GroupList v-else-if="activeType.typeName === 'group'" @reqChatMsgList="reqChatMsgList"></GroupList>
-      <ShareCom v-else @sendShareType="sendShareType"></ShareCom>
+    <MsgCom
+      v-if="activeType.typeName === 'msg'"
+      @reqChatMsgList="reqChatMsgList"
+    ></MsgCom>
+    <GroupList
+      v-else-if="activeType.typeName === 'group'"
+      @reqChatMsgList="reqChatMsgList"
+    ></GroupList>
+    <ShareCom v-else @sendShareType="sendShareType"></ShareCom>
     <div class="footer">
-         <img v-for="(item,index) in doneSvgList" :key="index" :src="getSrc(item)" alt="" @click="chooseType(index)">
+      <img
+        v-for="(item, index) in doneSvgList"
+        :key="index"
+        :src="getSrc(item)"
+        alt=""
+        @click="chooseType(index)"
+      />
     </div>
   </div>
 </template>
 
 <script lang="ts" setup>
 import { require } from "@/utils/require.ts";
-import MsgCom from './msgCom.vue'
-import GroupList from './groupList.vue'
-import ShareCom from './shareCom.vue'
-let emit = defineEmits(["sendmsgList", "sendUserName",'changeDoneType','sendShareType']);
-interface svgSrcItem{
-  normal:string
-  active:string
-  nowType:string
-  typeName:string
-  typeCname:string
+import MsgCom from "./msgCom.vue";
+import GroupList from "./groupList.vue";
+import ShareCom from "./shareCom.vue";
+let emit = defineEmits([
+  "sendmsgList",
+  "sendUserName",
+  "changeDoneType",
+  "sendShareType",
+]);
+const route = useRoute();
+interface svgSrcItem {
+  normal: string;
+  active: string;
+  nowType: string;
+  typeName: string;
+  typeCname: string;
 }
-const activeType:Ref<svgSrcItem> = ref(null)
-const doneSvgList:Ref<Array<svgSrcItem>> = ref([
+const activeType: Ref<svgSrcItem> = ref(null);
+const doneSvgList: Ref<Array<svgSrcItem>> = ref([
   {
-    normal:'@/assets/friend/msg.svg',
-    active:'@/assets/friend/msg_active.svg',
-    nowType:'normal',
-    typeName:'msg',
-    typeCname:'消息列表'
+    normal: "@/assets/friend/msg.svg",
+    active: "@/assets/friend/msg_active.svg",
+    nowType: "normal",
+    typeName: "msg",
+    typeCname: "消息列表",
   },
   {
-    normal:'@/assets/friend/group.svg',
-    active:'@/assets/friend/group_active.svg',
-    nowType:'normal',
-    typeName:'group',
-    typeCname:'通讯录'
+    normal: "@/assets/friend/group.svg",
+    active: "@/assets/friend/group_active.svg",
+    nowType: "normal",
+    typeName: "group",
+    typeCname: "通讯录",
   },
   {
-    normal:'@/assets/friend/share.svg',
-    active:'@/assets/friend/share_active.svg',
-    nowType:'normal',
-    typeName:'share',
-    typeCname:'动态空间'
-  }
-])
+    normal: "@/assets/friend/share.svg",
+    active: "@/assets/friend/share_active.svg",
+    nowType: "normal",
+    typeName: "share",
+    typeCname: "动态空间",
+  },
+]);
 
-const getSrc = (item:svgSrcItem)=>{
+const getSrc = (item: svgSrcItem) => {
   // return require(item[(item as svgSrcItem).nowType])
-  let type = item.nowType
-  return require(item[type])
-}
-const chooseType = (index:number)=>{
-  doneSvgList.value = doneSvgList.value.map((item:svgSrcItem)=>{
+  let type = item.nowType;
+  return require(item[type]);
+};
+const chooseType = (index: number) => {
+  doneSvgList.value = doneSvgList.value.map((item: svgSrcItem) => {
     return {
-      normal:item.normal,
-      active:item.active,
-      nowType:'normal',
-      typeName:item.typeName,
-      typeCname:item.typeCname
-    }
-  })
-  activeType.value = doneSvgList.value[index]
-  if(doneSvgList.value[index].nowType === 'normal'){
-    doneSvgList.value[index].nowType = 'active'
-  }else{
-    doneSvgList.value[index].nowType = 'normal'
+      normal: item.normal,
+      active: item.active,
+      nowType: "normal",
+      typeName: item.typeName,
+      typeCname: item.typeCname,
+    };
+  });
+  activeType.value = doneSvgList.value[index];
+  if (doneSvgList.value[index].nowType === "normal") {
+    doneSvgList.value[index].nowType = "active";
+  } else {
+    doneSvgList.value[index].nowType = "normal";
   }
-  emit('changeDoneType',doneSvgList.value[index].typeName)
-}
+  emit("changeDoneType", doneSvgList.value[index].typeName);
+};
 
 const reqChatMsgList = (userName: string) => {
   let msgList = [];
@@ -150,16 +168,21 @@ const reqChatMsgList = (userName: string) => {
   emit("sendmsgList", msgList);
   emit("sendUserName", userName);
 };
-const sendShareType = (typeName:string)=>{
-  emit('sendShareType',typeName)
-}
-activeType.value = doneSvgList.value[0]
-chooseType(0)
+const sendShareType = (typeName: string) => {
+  emit("sendShareType", typeName);
+};
+activeType.value = doneSvgList.value[0];
+chooseType(0);
 
+watch(route, (newVal) => {
+  if (newVal.name === "chat") {
+    chooseType(0);
+  }
+});
 </script>
 
 <style lang="less" scoped>
-img{
+img {
   cursor: pointer;
 }
 .leftList {
@@ -197,25 +220,27 @@ img{
       text-align: center;
     }
   }
-  .footer{
+  .footer {
     width: 100%;
-    height:50px;
+    height: 50px;
     position: absolute;
     left: 0px;
     bottom: 0px;
     display: flex;
     justify-content: space-around;
-      align-items: center;
-    img{
+    align-items: center;
+    img {
       width: 30px;
       cursor: pointer;
     }
   }
 }
-.transition-enter, .transition-leave-to{
+.transition-enter,
+.transition-leave-to {
   opacity: 0;
 }
-.transition-enter-active, .transition-leave-active{
+.transition-enter-active,
+.transition-leave-active {
   transition: opacity 0.5s ease;
 }
 </style>
