@@ -13,3 +13,18 @@ export interface msgItem {
     url: string,
     id: string
 }
+export interface groupItem {
+   id:string
+   name:string,
+   nickname:string,
+}
+export interface shareItem {
+   id:string
+   name:string,
+   cname:string
+}
+export interface shopTitleItem{
+    id:string
+    value:string
+    label:string
+}

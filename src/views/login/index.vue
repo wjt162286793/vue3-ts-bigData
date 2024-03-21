@@ -13,7 +13,6 @@ import { Point, pointType } from "./utils.ts";
 const router = useRouter();
 
 const gotoHomePage = () => {
-  console.log("点击了没", router);
   router.push({
     name: "dashboard",
   });

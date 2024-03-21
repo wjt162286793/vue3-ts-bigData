@@ -68,7 +68,7 @@ onMounted(() => {
   //error2 使用延迟渲染
   nextTick(() => {
     valueHtml.value = "";
-    console.log(editorRef.value.getAllMenuKeys(), "???配置");
+    console.log(editorRef.value.getAllMenuKeys(), "editor的全部配置");
   });
 });
 
@@ -96,7 +96,7 @@ onBeforeUnmount(() => {
 //操作监听事件
 const handleCreated = (editor) => {
   editorRef.value = editor;
-  console.log("created", editor);
+  console.log("editor创建实例", editor);
 };
 const handleChange = (editor) => {
   // console.log("change:", editor.children);
@@ -131,12 +131,9 @@ const customPaste = (editor, event, callback) => {
 };
 
 
-
+//发送信息
 const submitHandler = () => {
   let editor = editorRef.value;
-  console.log(editor, "组件");
-  console.log(editor.getText());
-  console.log(props,'??props')
   const newMsg: msgItem = {
     from: "self",
     text: editor.getText(),
@@ -165,7 +162,7 @@ const submitHandler = () => {
 //   },
 //   {
 //     from: "others",
-//     text: "有没有兴趣计入我们伟大的德玛西亚帝国",
+//     text: "有没有兴趣加入我们伟大的德玛西亚帝国",
 //     time: "2024-3-20 / 10:20",
 //     url: "@/assets/friend/jiawen.png",
 //     id: "3",
@@ -231,7 +228,7 @@ const submitHandler = () => {
       .selfText {
         margin-right: 20px;
         min-height: 50px;
-        background: rgb(61, 235, 9);
+        background: #3deb09;
         padding: 12px 24px;
         color: #000;
         border-radius: 16px;

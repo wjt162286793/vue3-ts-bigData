@@ -7,7 +7,8 @@ const dashBoardChildrenList: Array<RouteRecordRaw> = [
         meta:{
             cname:'好友系统'
         },
-        component:()=>import('@/views/friend/index.vue')
+        component:()=>import('@/views/friend/index.vue'),
+        
     },
     {
         path:'/dashboard/note',
@@ -84,6 +85,49 @@ const globalRoutes: Array<RouteRecordRaw> = [
                     cname:'好友系统'
                 },
                 component:()=>import('@/views/friend/index.vue'),
+                redirect:'/dashboard/friend/chat',
+                children:[
+                    {
+                        path:'/dashboard/friend/chat',
+                        name:'chat',
+                        meta:{
+                            cname:'聊天系统'
+                        },
+                        component:()=>import('@/views/friend/chatBox.vue'),
+                    },
+                    {
+                        path:'/dashboard/friend/shop',
+                        name:'shop',
+                        meta:{
+                            cname:'梦商城'
+                        },
+                        component:()=>import('@/views/friend/shop/index.vue'),
+                    },
+                    {
+                        path:'/dashboard/friend/live',
+                        name:'live',
+                        meta:{
+                            cname:'梦音频'
+                        },
+                        component:()=>import('@/views/friend/live/index.vue'),
+                    },
+                    {
+                        path:'/dashboard/friend/nearby',
+                        name:'nearby',
+                        meta:{
+                            cname:'附近'
+                        },
+                        component:()=>import('@/views/friend/nearby/index.vue'),
+                    },
+                    {
+                        path:'/dashboard/gameLog/shop',
+                        name:'gameLog',
+                        meta:{
+                            cname:'游戏日志'
+                        },
+                        component:()=>import('@/views/friend/gameLog/index.vue'),
+                    }
+                ]
             },
             {
                 path:'/dashboard/note',
