@@ -17,14 +17,14 @@
       </li>
     </ul>
     <ul class="productList">
-      <li class="productItem">
-        <img src="@/assets/shop/product.jpg" class="img" alt="" />
+      <li class="productItem" v-for="(productItem) in productList" :key="productItem.id" @click="chooseProduct(productItem)">
+        <img :src="require(productItem.imgUrl)" class="img" alt="" />
         <p class="productDsc">
-          <span class="productName">雷蛇鼠标</span>
-          <span class="productPrice">30空间币</span>
+          <span class="productName">{{ productItem.productName }}</span>
+          <span class="productPrice">{{ productItem.productPrice }}空间币</span>
         </p>
       </li>
-      <li class="productItem">
+      <!-- <li class="productItem">
         <img src="@/assets/shop/aoding.webp" class="img" alt="" />
         <p class="productDsc">
           <span class="productName">奥丁</span>
@@ -86,14 +86,16 @@
           <span class="productName">唐刀</span>
           <span class="productPrice">800空间币</span>
         </p>
-      </li>
+      </li> -->
     </ul>
   </div>
 </template>
 
 <script lang="ts" setup>
-import { shopTitleItem } from "../type";
+import { shopTitleItem,productItemType } from "../type";
 import { require } from "@/utils/require.ts";
+
+const router = useRouter()
 
 const shopTitleList: Ref<Array<shopTitleItem>> = ref([
   {
@@ -131,6 +133,25 @@ const activeType: Ref<shopTitleItem> = ref(shopTitleList.value[0]);
 const changeTypeHandler = (item: shopTitleItem) => {
   activeType.value = item;
 };
+
+const productList:Ref<Array<productItemType>> = ref([
+   {
+    id:'1',
+    imgUrl:'@/assets/shop/product.jpg',
+    productName:'雷蛇鼠标',
+    productDesc:'电竞专用的雷蛇鼠标,诸多客户的第一选择,银河舰队的首选鼠标',
+    productPrice:30
+   }
+])
+
+const chooseProduct = (item:productItemType)=>{
+  router.push({
+    name:'shopDetail',
+    query:{
+      id:item.id
+    }
+  })
+}
 </script>
 
 <style lang="less" scoped>

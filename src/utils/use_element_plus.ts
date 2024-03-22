@@ -1,4 +1,4 @@
-import {ElInput,ElButton} from 'element-plus'
+import {ElInput,ElButton,ElTabs,ElTabPane} from 'element-plus'
 
 export let componentList = [
     {
@@ -9,4 +9,12 @@ export let componentList = [
         name: 'ElButton',
         element: ElButton
     },
+    {
+        name:'ElTabs',
+        element:ElTabs
+    },
+    {
+        name:'ElTabPane',
+        element:ElTabPane
+    }
 ]

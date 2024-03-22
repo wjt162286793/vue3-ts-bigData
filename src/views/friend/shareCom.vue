@@ -20,7 +20,7 @@ const list:Ref<Array<shareItem>> = ref([
     {
         id:'2',
         name:'live',
-        cname:'梦音频'
+        cname:'梦视频'
     },
     {
         id:'3',
@@ -30,7 +30,7 @@ const list:Ref<Array<shareItem>> = ref([
     {
         id:'4',
         name:'gameLog',
-        cname:'游戏日志'
+        cname:'游戏圈'
     },
 ]) 
 const getUrl = (item:shareItem)=>{
