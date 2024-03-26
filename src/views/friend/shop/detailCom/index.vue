@@ -8,12 +8,15 @@
         </p>
     </div>
    <div class="infoBox">
-        <el-tabs type="border-card">
-            <el-tab-pane label="商品详情">
-                 <ProductDetail></ProductDetail>
+        <el-tabs type="border-card" v-model="tabValue">
+            <el-tab-pane label="商品详情" name="detail">
+                    <ProductDetail></ProductDetail>
             </el-tab-pane>
-            <el-tab-pane label="商品评价"></el-tab-pane>
+            <el-tab-pane label="商品评价" name="evalute">
+                    <ProductEvalute></ProductEvalute>
+            </el-tab-pane>
             <el-tab-pane label="同类商品"></el-tab-pane>
+            <el-tab-pane label="卖家店铺"></el-tab-pane>
             <el-tab-pane label="售后服务"></el-tab-pane>
         </el-tabs>
    </div>
@@ -22,6 +25,9 @@
 
 <script lang="ts" setup>
 import ProductDetail from './productDetail.vue'
+import ProductEvalute from './productEvaluate.vue'
+
+const tabValue:Ref<string> = ref('detail')
 </script>
 
 <style lang="less" scoped>

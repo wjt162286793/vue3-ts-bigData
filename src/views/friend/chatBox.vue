@@ -68,7 +68,7 @@ onMounted(() => {
   //error2 使用延迟渲染
   nextTick(() => {
     valueHtml.value = "";
-    console.log(editorRef.value.getAllMenuKeys(), "editor的全部配置");
+    // console.log(editorRef.value.getAllMenuKeys(), "editor的全部配置");
   });
 });
 
@@ -96,7 +96,7 @@ onBeforeUnmount(() => {
 //操作监听事件
 const handleCreated = (editor) => {
   editorRef.value = editor;
-  console.log("editor创建实例", editor);
+  // console.log("editor创建实例", editor);
 };
 const handleChange = (editor) => {
   // console.log("change:", editor.children);

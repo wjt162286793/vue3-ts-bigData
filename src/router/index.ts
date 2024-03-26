@@ -13,7 +13,7 @@ const dashBoardChildrenList: Array<RouteRecordRaw> = [
     path: "/dashboard/note",
     name: "note",
     meta: {
-      cname: "个人笔记",
+      cname: "个人博客",
     },
     component: () => import("@/views/note/index.vue"),
   },
@@ -150,7 +150,7 @@ const globalRoutes: Array<RouteRecordRaw> = [
         path: "/dashboard/note",
         name: "note",
         meta: {
-          cname: "个人笔记",
+          cname: "个人博客",
         },
         component: () => import("@/views/note/index.vue"),
       },

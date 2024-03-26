@@ -24,7 +24,8 @@ import router from './router/index'
 import BaiduMap from 'vue-baidu-map-3x'
 
 //swiper
-import 'swiper/css';
+import 'swiper/swiper-bundle.min.css'
+// import 'swiper/swiper-bundle.min.js'
 
 Vue.use(Editor)
 Vue.use(Toolbar)

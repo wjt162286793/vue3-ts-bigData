@@ -57,6 +57,7 @@ export interface gameLogItem{
     }>
 }
 
+//商品栏
 export interface productItemType{
     id:string
     imgUrl:string
@@ -64,3 +65,32 @@ export interface productItemType{
     productDesc:string
     productPrice:number
 } 
+
+//轮播
+export interface carouselItemType{
+    id:string
+    imgUrl:string
+}
+
+export interface anyUserType{
+    id:string
+    userName:string
+    userAvatar:string
+}
+
+//评论区
+export interface evaluateItem{
+    id:string
+    ownerInfo:anyUserType
+    isFirstFloor:boolean
+    text:string
+    imgList:string[]
+    userTotal:number | null
+    textTotal:number | null
+    loveTotal:number
+    toUserInfo:anyUserType
+    time:string
+    ip:string
+    children:evaluateItem
+}
+
