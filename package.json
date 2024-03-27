@@ -20,7 +20,8 @@
     "sass": "^1.72.0",
     "sass-loader": "^14.1.1",
     "swiper": "^6.7.5",
-    "vue-baidu-map-3x": "^1.0.37"
+    "vue-baidu-map-3x": "^1.0.37",
+    "ws": "^8.16.0"
   },
   "devDependencies": {
     "@types/node": "^20.10.6",
